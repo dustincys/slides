@@ -208,7 +208,9 @@ git init
 
 - 充分使用自由软件
 - 架构优于细节
+- “舒适区不舒服”
 
 
 
 ## 谢谢
+![公众号](https://raw.githubusercontent.com/dustincys/cn/assets/qrcode_for_gh_af6e07ba273e_258.jpg)
