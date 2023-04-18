@@ -194,6 +194,190 @@ git init
     - [MLFlow tracking](https://www.mlflow.org/)
 
 
+### 之一：monocle3的参数寻优
+
+
+#### 提交job
+```bash
+PROJECT_FOLDER=/path/to/folder
+DATA_FOLDER=${PROJECT_FOLDER}/data
+RESULT_FOLDER=${PROJECT_FOLDER}/result
+CODE_FOLDER=${PROJECT_FOLDER}/code
+PIPELINE_FOLDER=${CODE_FOLDER}/pipeline
+SRC_FOLDER=${CODE_FOLDER}/src
+KNOWLEDGE_FOLDER=${PROJECT_FOLDER}/knowledge
+PIPELINE_NAME=6_Neutrophil_trajectory__monocle3
+PIPELINE_PATH_NAME=6_Neutrophil_trajectory/monocle3
+PROJECT_NAME=$(basename ${PROJECT_FOLDER})
+
+OutDir=$RESULT_FOLDER/$PIPELINE_PATH_NAME
+if [ ! -d $OutDir ]; then
+    mkdir -p $OutDir
+fi
+
+runR="Rscript --no-save "
+
+es=( $(seq 0.1 0.1 0.3) )
+ms=( $(seq 5 5 10) )
+gs=( $(seq 0.1 0.1 0.3) )
+
+JOBFOLDER=$OutDir
+SEURAT_OBJ=/path/to/Neutrophil.rds
+START_CLUSTER=6
+
+for tempe in ${es[@]}; do
+    for tempm in ${ms[@]}; do
+        for tempg in ${gs[@]}; do
+            JOBNAME=monocle3_${tempe}_${tempm}_${tempg}
+            if [ -f ${JOBFOLDER}/${JOBNAME}.o.txt ] || [ -f ${JOBFOLDER}/${JOBNAME}.e.txt ]; then
+                rm ${JOBFOLDER}/${JOBNAME}.*.txt -f
+            fi
+            bsub \
+                -J ${JOBNAME} \
+                -o ${JOBFOLDER}/${JOBNAME}.o.txt \
+                -e ${JOBFOLDER}/${JOBNAME}.e.txt \
+                -cwd ${JOBFOLDER} \
+                -q e40short \
+                -W 2:00 \
+                -n 1 \
+                -M 50 \
+                -R rusage[mem=50] \
+                -B \
+                -N \
+                -u ychu2@mdanderson.org \
+                /bin/bash -c "
+                    source ~/.bashrc; ssh -fNT -L 5196:127.0.0.1:5196 user@host;
+                    module load R/4.0.3;
+                    ${runR} /path/to/trajectory.r \
+                        --mbl ${tempm} \
+                        --gdr ${tempg} \
+                        --edr ${tempe} \
+                        --out_dir ${JOBFOLDER} \
+                        --in_seurat_obj ${SEURAT_OBJ} \
+                        --start_cluster ${START_CLUSTER};
+                    exit"
+        done
+    done
+done
+```
+
+
+#### r代码
+```R
+#'--------------------------------------------------------------
+#' filename : trajectory.r
+#' Date : 2020-12-03
+#' contributor : Yanshuo Chu
+#' function: trajectory
+#'--------------------------------------------------------------
+
+print('<==== trajectory ====>')
+
+suppressMessages({
+    library(optparse)
+    library(Seurat)
+    library(SeuratWrappers)
+    library(monocle3)
+    library(tidyverse)
+    library(Matrix)
+    library(ggplot2)
+    library(mlflow)
+})
+
+option_list <- list(
+  make_option(c("-o", "--out_dir"),
+    type = "character",
+    help = "output folder"),
+  make_option(c("-i", "--in_seurat_obj"),
+    type = "character",
+    help = "input seurat obj"),
+  make_option(c("-s", "--start_cluster"),
+    type = "integer",
+    default = 6,
+    help = "start_cluster"),
+  make_option(c("-e", "--edr"),
+    type = "double",
+    default = 1.0,
+    help = "euclidean_distance_ratio",
+    metavar = "double"
+  ),
+  make_option(c("-m", "--mbl"),
+    type = "integer",
+    default = 10,
+    help = "minimal_branch_len",
+    metavar = "integer"
+  ),
+  make_option(c("-g", "--gdr"),
+    type = "double",
+    default = 1 / 3.0,
+    help = "geodesic_distance_ratio",
+    metavar = "double"
+  )
+)
+
+opt_parser <- OptionParser(option_list = option_list)
+opt <- parse_args(opt_parser)
+
+seurat_obj <- readRDS(opt$in_seurat_obj)
+
+exp_name <- paste0(opt$start_cluster, "_",
+             opt$edr, "_",
+             opt$mbl, "_",
+             opt$gdr)
+
+mlflow_set_tracking_uri(uri = "http://127.0.0.1:5196")
+mlflow_set_experiment(experiment_name = "monocle3_neutrophil")
+
+with(mlflow_start_run(), {
+  mlflow_log_param("in_seurat_obj", opt$in_seurat_obj)
+  mlflow_log_param("start_cluster", opt$start_cluster)
+  mlflow_log_param("edr", opt$edr)
+  mlflow_log_param("mbl", opt$mbl)
+  mlflow_log_param("gdr", opt$gdr)
+
+  figure_path <- file.path(opt$out_dir,
+                          "monocle3_mlflow",
+                          paste0("e_", opt$edr),
+                          paste0("m_", opt$mbl),
+                          paste0("g_", opt$gdr))
+  if (!dir.exists(figure_path)) {
+      dir.create(figure_path, recursive = TRUE)
+  }
+  setwd(figure_path)
+
+  print("Begin generate monocle obj")
+  monocle_cds <- as.cell_data_set(seurat_obj)
+  monocle_cds <- cluster_cells(cds = monocle_cds, reduction_method = "UMAP")
+  print("Begin learn graph")
+  monocle_cds <- learn_graph(
+    monocle_cds,
+    learn_graph_control = list(
+      euclidean_distance_ratio = opt$edr,
+      minimal_branch_len = opt$mbl,
+      geodesic_distance_ratio = opt$gdr
+    )
+  )
+
+  start_cells <- Cells(seurat_obj)[
+    seurat_obj$seurat_clusters == opt$start_cluster
+  ]
+  monocle_cds <- order_cells(monocle_cds,
+    reduction_method = "UMAP",
+    root_cells = start_cells
+  )
+
+  ptime <- pseudotime(monocle_cds, reduction_method = "UMAP")
+  ptime_sd <- sd(ptime)
+  mlflow_log_metric("ptime_sd", ptime_sd)
+})
+```
+
+
+### 之二：bulk-RNAseq分析
+
+![screenshort](https://raw.githubusercontent.com/dustincys/slides/images/Screenshot%202023-04-18%20at%2011.35.25.png)
+
+
 
 ## 自动化/智能化操作流程
 
