@@ -12,6 +12,20 @@ Yanshuo Chu
 
 
 
+## 如何高效、快速完成项目
+
+![run](https://raw.githubusercontent.com/dustincys/slides/images/134233agtww9t4sl9wg5ut.jpg)
+
+图片来源：<https://blog.sciencenet.cn/blog-520749-1042142.html>
+
+
+### 故事是怎么形成的
+![idea](https://raw.githubusercontent.com/dustincys/slides/images/1342287r3v4r7aalavrcor.png)
+
+图片来源：<https://blog.sciencenet.cn/blog-520749-1042142.html>
+
+
+
 ## 数据科学常见工程问题
 
 - 工程烂尾
@@ -142,6 +156,7 @@ scp your.server.domain:/path/to/cnofigs.zip /path/to/local/folder
     - src
       - public
       - private
+    - software
   - data
     - dataset 1
     - dataset 2
