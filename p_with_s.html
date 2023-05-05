@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="cys" />
+  <title>introduce of &quot;A new method to measure the semantic similarity of GO&quot; terms</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js.gz"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">introduce of &quot;A new method to measure the semantic similarity of GO&quot; terms</h1>
+  <p class="author">
+cys
+  </p>
+  <p class="date">2013-9-7 13:25:55</p>
+</div>
+<div id="abstract" class="slide section level1">
+<h1>ABSTRACT</h1>
+<ul class="incremental">
+<li>Motivation</li>
+</ul>
+<ol class="incremental" style="list-style-type: decimal">
+<li>functional similarities of genes based on gene annotation information from - <strong>heterogeneous data source</strong></li>
+</ol>
+<ul class="incremental">
+<li>Results</li>
+</ul>
+<ol class="incremental" style="list-style-type: decimal">
+<li>an algorithm to measure the semantic similarity of GO terms</li>
+<li>a new algorithm to measure the functional similarity of genes</li>
+</ol>
+<ul class="incremental">
+<li>validate</li>
+</ul>
+<ol class="incremental" style="list-style-type: decimal">
+<li>consistent with human perspectives</li>
+</ol>
+<ul class="incremental">
+<li>availability</li>
+</ul>
+<ol class="incremental" style="list-style-type: decimal">
+<li><a href="http://bioinformatics.clemson.edu/G-SESAME/index.php">http://bioinformatics.clemson.edu/G-SESAME/index.php</a></li>
+</ol>
+</div>
+<div id="introduction" class="slide section level1">
+<h1>1 INTRODUCTION</h1>
+</div>
+<div id="p1-motivation" class="slide section level1">
+<h1>p1: motivation</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>manual discovery of this important knowledge requires significant time and effort</li>
+</ol>
+</div>
+<div id="p2-outdated-method" class="slide section level1">
+<h1>p2: outdated method</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>outdated method measure gene functional similarities based on
+<ul class="incremental">
+<li>the probability of the appearance of GO terms</li>
+<li>the <a href="http://www.agreestat.com/research_papers/kappa_statistic_is_not_satisfactory.pdf">kappa statistics</a> of similar annotation terms correlated with different genes</li>
+</ul></li>
+<li>ignore the semantic relations (‘is-a’ and ‘part-of ’)</li>
+</ol>
+</div>
+<div id="p3-outdated-method" class="slide section level1">
+<h1>p3: outdated method</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Resnik and their variants: <span class="math">\[Sim_{Resnik}=IC(t_{MICA})\]</span> Drawback:
+<ul class="incremental">
+<li>it ignores the information contained in the <strong>structure</strong> of the ontology by only concentrating on the information content of a term derived from the corpus statistics.</li>
+</ul></li>
+</ol>
+</div>
+<div id="p4-outdated-method" class="slide section level1">
+<h1>p4: outdated method</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Lin: <span class="math">\[Sim_{Lin}(t_1,t_2)=\frac{2*IC(t_{MICA})}{IC(t_1)+IC(t_2)}\]</span></li>
+<li><a href="http://arxiv.org/pdf/cmp-lg/9709008v1.pdf">Jiang</a>: <span class="math">\[wt(c,p)=\left(\beta+(1-\beta)\frac{\bar{E}}{E(p)}\right)\left(\frac{d(p)+1}{d(p)}\right)^\alpha[IC(c)-IC(p)]T(c,p)\]</span> <span class="math">\[Dist(w_1,w_2)=\sum\limits_{c \in\{path(c_1,c_2)-LSuper(c_1,c_2)\} }wt(c,parent(c))\]</span></li>
+</ol>
+<ul class="incremental">
+<li>Drawback: shallow annotation if two gene products are well annotated near the root of the ontology (shallow annotation), their semantic similarity will always be measured at very high (close to 1) and their <strong>semantic distance</strong> will always be computed close to nil, thus providing a misleading result.</li>
+</ul>
+</div>
+<div id="p5-drawbacks" class="slide section level1">
+<h1>p5 : drawbacks</h1>
+<ul class="incremental">
+<li>depend on the gene annotation statistics to measure the semantic similarity of GO terms. Hence, people may get different semantic similarity values for the same two GO terms if they use different gene annotation data.</li>
+</ul>
+</div>
+<div id="p6-2-principles----conclusion" class="slide section level1">
+<h1>p6 : 2 principles --&gt; conclusion</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>the distances to the closest common ancestor term cannot accurately represent the semantic difference of two GO terms.</li>
+<li>measuring the semantic similarity of two GO terms based only on the number of common ancestor terms cannot discern the semantic contributions of the ancestor terms to these two specific terms.</li>
+</ol>
+<ul class="incremental">
+<li>conclusion: a common ancestor of two GO terms may have different contributions to the semantics of these specific terms.</li>
+</ul>
+</div>
+<div id="p7-sample-to-manifest---location-of-common-ancestor" class="slide section level1">
+<h1>p7 : sample to manifest--&gt; location of common ancestor</h1>
+<ul class="incremental">
+<li>measuring the semantic similarity of GO terms must consider not only the number of the common ancestor terms but also the locations of these ancestor terms related to the two specific terms in the GO graph.</li>
+</ul>
+</div>
+<div id="gene-functional-similarity" class="slide section level1">
+<h1>2 GENE FUNCTIONAL SIMILARITY</h1>
+</div>
+<div id="pop-out-equation" class="slide section level1">
+<h1>2.1~2.2: pop out equation</h1>
+<p><span class="math">\[S_{GO}=\frac{\sum\limits_{t \in T_A\cap T_B}(S_A(t)+S_B(t))}{SV(A)+SV(B)}\]</span> <span class="math">\[
+\left\{
+\begin{array}{*{20}{l}}
+&amp;S_A(A)=1\\
+&amp;S_A(t)=\max\{w_e*S_A(t&#39;)|t&#39; \in childrenof(t)\}\quad if \quad t \ne A
+\end{array}
+\right.
+\]</span></p>
+</div>
+<div id="functional-similarity-of-genes" class="slide section level1">
+<h1>2.3 Functional similarity of genes</h1>
+<ul class="incremental">
+<li>outdated method <span class="math">\(Sim(G_1,G_2)=\frac{\left|GO_1\cap GO_2 \right|}{\left|GO_1 \cup GO_2 \right|}\)</span></li>
+<li>sample to manifest drawback</li>
+<li><span class="math">\[Sim(G_1,G_2)=\frac{\sum\limits_{1\leqslant i \leqslant m}Sim(go_{1i},GO_2)+ \sum\limits_{1\leqslant j \leqslant n}Sim(go_{2j},GO_1)}{m+n}\]</span></li>
+</ul>
+</div>
+<div id="validation" class="slide section level1">
+<h1>3 validation</h1>
+<p><a href="http://en.wikipedia.org/wiki/Enzyme_Commission_number">EC number</a></p>
+</div>
+<div id="future-studies" class="slide section level1">
+<h1>future studies</h1>
+<ul class="incremental">
+<li>we will study whether we can improve our similarity measurement by varying the semantic contribution factors for relationship edges based on their distance to the root of the ontology.</li>
+<li>We will also extend our algorithms to handle the gene annotation data using other ontologies.</li>
+</ul>
+</div>
+</body>
+</html>

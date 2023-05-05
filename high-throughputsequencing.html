@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>high-throughput sequencing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: 29d1c5bc36da364ad5aa86946d420b7bbc54a253 */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>High-throughput sequencing for biology and medicine</h1>
+<ul>
+<li>by: Wendy Weijia Soon, Manoj Hariharan and Michael P Snyder </li>
+<li>forum: <a href="http://seqanswers.com/forums/index.php">SEQanswer</a>, data\tool\wiki listed</li>
+</ul>
+<h2>NGS and Sanger sequencing</h2>
+<ul>
+<li>Sanger sequencing</li>
+<li>NGS</li>
+<li>
+Serial analysis of gene expression
+<ul>
+<li>available data: <a href="http://cgap.nci.nih.gov/SAGE">http://cgap.nci.nih.gov/SAGE</a></li>
+</ul>
+</li>
+</ul>
+<h2>The various NGS assays employed in the ENCODE project to annotate the human genome</h2>
+<ol>
+<li>
+<p>RNA-seq</p>
+<ul>
+<li>overview<br />
+<img src="http://i.imgur.com/QaWFYys.jpg" alt="pic" /></li>
+<li>
+reference
+<ul>
+<li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/">ncbi</a></li>
+<li><a href="http://en.wikipedia.org/wiki/RNA-Seq">wiki</a></li>
+<li><a href="http://rnaseq.uoregon.edu/index.html">RNA-seq for everyone</a></li>
+</ul>
+</li>
+<li>
+function
+<ul>
+<li>Measure gene expression.</li>
+<li>Characterize alternative splicing, alternative polyadenylation, and alternative transcription.</li>
+<li>Discover and annotate transcripts including identify their 5’ and 3’ ends and splice-junctions.</li>
+</ul>
+</li>
+<li>
+available data sample
+<ul>
+<li><a href="http://www.ebi.ac.uk/arrayexpress/experiments/E-GEUV-1/">http://www.ebi.ac.uk/arrayexpress/experiments/E-GEUV-1/</a></li>
+<li><a href="http://www.rna-seqblog.com/news/rna-seq-data-release-for-1000-genomes-samples/">instruction</a></li>
+</ul>
+</li>
+<li>
+analysis tools
+<ul>
+<li><a href="http://res.illumina.com/documents/products/datasheets/datasheet_rnaseq_analysis.pdf">pdf document</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>CAGE</p>
+<ul>
+<li>overview<br />
+<img src="http://www.osc.riken.jp/english/activity/cage/basic/img/fig03.gif" alt="pic" /></li>
+<li>
+function:
+<ul>
+<li>CAGE allows high-throughout gene expression analysis </li>
+<li>the profiling of transcriptional start points (TSP) </li>
+<li>including promoter usage analysis. 
+<img src="http://www.osc.riken.jp/english/activity/cage/basic/img/fig01.gif" alt="pic" /></li>
+</ul>
+</li>
+<li>
+<p>available data</p>
+</li>
+<li>
+<p>analysis tools
+-<a href="http://bioconductor.org/packages/2.12/bioc/vignettes/CAGEr/inst/doc/CAGEr.pdf">r package 'CAGEr' pdf doc</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>RNA-PET(paired end)</p>
+<ul>
+<li>
+<p>paired end<br />
+<img src="http://www.seq.cn/data/attachment/forum/201208/06/120712n1anhrakqnlohhva.jpg" alt="pic" /><br />
+Paired ends 是指同一个DNA分子的两头，所以你可以先测一端，然后反过来再测另一端。测序流程获得了若干的DNA分子，每个DNA的分子~<code>500bp</code>，这时你测DNA分子两头<code>35bp</code>，这时你会获得：</p>
+<ul>
+<li>tag1 序列</li>
+<li>tag2 序列    
+</li>
+</ul>
+<p>tag1加上tag2，连同中间的区域纸为~<code>500bp</code>。
+正常来说我们可以试着把这tag1和tag2回贴到基因组上~<code>500bp</code>的区域。
+但是某些时候，library的信息，跟我们实际回贴的结果是不一样的。这样的不一致可以有效地检测出大的结构变异，例如Insertion、Deletion、Inversion等。譬如说:</p>
+<ul>
+<li>当我们把tag1，tag2回贴到基因组上1000bp的区域上时，这可能暗示着你的基因组有着deletion</li>
+<li>若是tag1，tag2回贴到基因组上200bp的区域上时，暗示着你的基因组有Insertion  
+</li>
+</ul>
+<p>Paired-end测序不仅解决了一次测序不能测很长的问题，又能带来<strong>结构变异</strong>等新的发现。</p>
+</li>
+<li><a href="http://www.plob.org/2011/12/10/892.html">overview + function</a><br />
+<img src="http://upload.plob.ybzhao.com/wp-content/uploads/2011/12/PET-sequencing.jpg" alt="pic" /></li>
+</ul>
+</li>
+<li>
+<p>ChIRP-Seq</p>
+<ul>
+<li>overview<br />
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Chromatin_immunoprecipitation_sequencing.svg/400px-Chromatin_immunoprecipitation_sequencing.svg.png" alt="pic" /></li>
+<li>
+function:  
+
+<ul>
+<li>ChIRP-Seq is a high-throughput sequencing method to discover RNA-bound DNA and proteins. </li>
+</ul>
+</li>
+<li>available data</li>
+</ul>
+</li>
+<li>
+<p>GRO-Seq</p>
+<ul>
+<li>
+function   
+
+<ul>
+<li>GRO-seq(Global Run-On Sequencing)测序技术,可以在整个基因组范围上绘制参与转录的RNA聚合酶的位置、数量和定位.通过GRO-seq技术，研究人员可以观测到基因组水平的进行的转录，这是一种对所有参与DNA聚合酶位置和定向的高分辨率虚拟图谱。</li>
+</ul>
+</li>
+<li>available <a href="http://seqanswers.com/forums/showthread.php?t=12365">data</a></li>
+</ul>
+</li>
+<li>
+<p><a href="http://genetics.med.harvard.edu/churchman/wp-content/uploads/2013/05/2012_Churchman.pdf">NET-seq</a></p>
+<ul>
+<li>
+<a href="http://www.cas.ac.cn/xw/kjsm/qkzl/201101/t20110125_3066928.shtml">function</a>  
+
+<ul>
+<li>研究转录过程的一个新方法转录（一个细胞的DNA模板的一个序列的互补性RNA版本的生成）正在成为一个比仅仅在几年前所认为的要更为复杂的过程。例如，“RNA聚合酶暂停”是普遍存在的，从而为各种不同调控过程提供一个焦点，而且很多转录副本注定要迅速退化。为了研究这些现象，Stirling Churchman和Jonathan Weissman建立了一种被称为“native elongating transcript sequencing”(NET-seq)的方法，该方法能够以单核苷酸分辨率对转录进行量化。NET-seq基于对与从活细胞直接获取的“RNA聚合酶-II”相关的新生副本进行测序。他们利用这一新方法对酿酒酵母的聚合酶暂停和回撤以及转录的方向性进行了研究。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+Ribo-Seq
+<ul>
+<li>
+available data
+<ul>
+<li><a href="http://gwips.ucc.ie/">GWIPS</a></li>
+</ul>
+</li>
+<li>
+funtion
+<ul>
+<li>Ribosome profiling (ribo-seq)(1) is a recently developed technique that provides <strong>Genome Wide Information on Protein Synthesis (GWIPS)(2) in vivo</strong>. By deep sequencing ribosome-protected mRNA fragments, the <strong>ribosome density</strong> along all mRNA transcripts present in the cell can <strong>be quantified</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ChIP-seq</p>
+<ul>
+<li>overview<br />
+<img src="http://www.51atgc.com/d/file/shiyanjishufangfa/yichuanxueshiyanjishu/ransezhimianyichendianfenxiCHiP/2011-03-10/6e615d379750556062c1226eb91db838.jpg" alt="pic" /></li>
+<li>analysis<br />
+<img src="http://www.51atgc.com/d/file/shiyanjishufangfa/yichuanxueshiyanjishu/ransezhimianyichendianfenxiCHiP/2011-03-10/76fc0a32315ce093455d8554ea41f933.jpg" alt="pic" /></li>
+<li><a href="http://www.51atgc.com/shiyanjishufangfa/yichuanxueshiyanjishu/ransezhimianyichendianfenxiCHiP/2011-03-10/8532_2.html">function</a><br />
+ 由于 ChIP-Seq 的数据是 DNA 测序的结果,为研究者提供了进一步深度挖掘生物信息的资源,研究者可以在以下几方面展开研究： 
+（ 1 ）判断 DNA 链的某一特定位置会出现何种组蛋白修饰； 
+（ 2 ）检测 RNA polymerase II 及其它反式因子在基因组上结合位点的精确定位； 
+（ 3 ）研究组蛋白共价修饰与基因表达的关系； 
+（ 4 ） CTCF 转录因子研究. </li>
+<li>
+available data
+<ul>
+<li><a href="http://deepbase.sysu.edu.cn/chipbase/">chipbase</a>: an integrated resource and platform for decoding transcription factor binding maps, expression profiles and transcriptional regulation of long non-coding RNAs (lncRNAs, lincRNAs), microRNAs, other ncRNAs(snoRNAs, tRNAs, snRNAs, etc.) and protein-coding genes from ChIP-Seq data. ChIPBase currently includes millions of transcription factor binding sites (TFBSs) among 6 species. ChIPBase provides several web-based tools and browsers to explore TF-lncRNA, TF-miRNA, TF-mRNA, TF-ncRNA and TF-miRNA-mRNA regulatory networks.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>DNAse footprinting</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/DNA_footprinting">overview</a><br />
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Courtney_2008.jpg/550px-Courtney_2008.jpg" alt="pic" /></li>
+<li>
+function  
+
+<ul>
+<li>DNA footprinting is a method of investigating the sequence specificity of DNA-binding proteins in vitro. This technique can be used to study protein-DNA interactions both outside and within cells.</li>
+</ul>
+</li>
+<li>
+available data  
+
+<ul>
+<li><a href="http://www.flyreg.org/">Drosophila DNase I Footprint Database (v2.0)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>DNAse-seq</p>
+<ul>
+<li><a href="http://cshprotocols.cshlp.org/content/2010/2/pdb.prot5384.full">overview</a><br />
+<img src="http://cshprotocols.cshlp.org/content/2010/2/pdb.prot5384/F1.large.jpg" alt="pic" /></li>
+<li>
+function  
+
+<ul>
+<li><strong>identify the location of regulatory regions</strong>, based on the genome-wide sequencing of regions super sensitive to cleavage by DNase I</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>FAIRE</p>
+<ul>
+<li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1891346/">overview</a><br />
+<img src="http://www.ncbi.nlm.nih.gov/corecgi/tileshop/tileshop.fcgi?p=PMC3&amp;id=905272&amp;s=6&amp;r=1&amp;c=1" alt="pic" /></li>
+<li>
+function
+<ul>
+<li>determining the sequences of those DNA regions in the genome associated with regulatory activity.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+Histone modification
+<ul>
+<li>overview<br />
+<img src="http://a0.att.hudong.com/21/97/01300000342361132240971585202.jpg" alt="pic" /></li>
+<li>
+available data 
+<ul>
+<li><a href="http://seqanswers.com/forums/showthread.php?t=24928">SEQanswer</a></li>
+<li><a href="http://202.97.205.78/hhmd/">Human Histone Modification Database(HHMD)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+RRBS
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Reduced_representation_bisulfite_sequencing">overview</a><br />
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Brief_overview_of_RRBS.jpg/375px-Brief_overview_of_RRBS.jpg" alt="pic" /></li>
+<li>
+function  
+
+<ul>
+<li><a href="http://www.bgitechsolutions.cn/service-solutions/ngs/epigenomics/rrbs/">Reduced Representation Bisulfite Sequencing（RRBS）</a>是一种准确、高效、经济的DNA甲基化研究方法，通过酶切富集启动子及CpG岛区域，并进行Bisulfite测序，同时实现DNA甲基化状态检测的高分辨率和测序数据的高利用率。DNA甲基化研究一直是疾病研究的热点，与基因表达、表型性状息息相关。RRBS作为一种高性价比的甲基化研究方法，在大规模临床样本的研究中具有广泛的应用前景。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+5C
+<ul>
+<li><a href="http://genome.cshlp.org/content/16/10/1299.long">overview</a><br />
+<img src="http://genome.cshlp.org/content/16/10/1299/F1.large.jpg" alt="pic" /></li>
+<li>
+function
+<ul>
+<li>5C should be widely applicable for <strong>large-scale mapping of cis- and trans- interaction networks of genomic elements and for the study of higher-order chromosome structure.</strong> </li>
+</ul>
+</li>
+<li>
+available data
+<ul>
+<li><a href="http://seqanswers.com/forums/showthread.php?p=108006">SEQanswer</a>  
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+ChIA-PET
+<ul>
+<li><a href="http://chiapet.gis.a-star.edu.sg/">data and tool</a></li>
+<li>
+<a href="http://en.wikipedia.org/wiki/ChIA-PET">function</a>
+<ul>
+<li>determine de novo long-range chromatin interactions genome-wide (Fullwood &amp; Yijun, 2009).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

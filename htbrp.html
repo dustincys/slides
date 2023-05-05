@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>how to build R package</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js.gz"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">how to build R package</h1>
+  <p class="author">
+
+  </p>
+</div>
+<div class="titleslide slide section level1"><h1>how to build R package</h1></div><div class="slide section level2">
+<h1>how to build R package</h1>
+<h3>Chu Yanshuo</h3>
+<h3><script type="text/javascript">
+<!--
+h='&#x79;&#x61;&#110;&#x73;&#104;&#x75;&#x6f;&#46;&#110;&#x61;&#x6d;&#x65;';a='&#64;';n='&#x63;&#104;&#x75;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x63;&#104;&#x75;&#32;&#x61;&#116;&#32;&#x79;&#x61;&#110;&#x73;&#104;&#x75;&#x6f;&#32;&#100;&#x6f;&#116;&#32;&#110;&#x61;&#x6d;&#x65;</noscript> | <script type="text/javascript">
+<!--
+h='&#104;&#x69;&#116;&#46;&#x65;&#100;&#x75;&#46;&#x63;&#110;';a='&#64;';n='&#x31;&#x33;&#98;&#x39;&#48;&#x33;&#48;&#50;&#54;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'13B903026@hit.edu.cn'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x31;&#x33;&#66;&#x39;&#48;&#x33;&#48;&#50;&#54;&#64;&#104;&#x69;&#116;&#46;&#x65;&#100;&#x75;&#46;&#x63;&#110;&#32;&#40;&#x31;&#x33;&#98;&#x39;&#48;&#x33;&#48;&#50;&#54;&#32;&#x61;&#116;&#32;&#104;&#x69;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x65;&#100;&#x75;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#110;&#x29;</noscript></h3>
+<h3>2013-09-11</h3>
+</div><div class="slide section level2">
+<h1>Preparation</h1>
+<ul class="incremental">
+<li>Linux &amp; Mac: just <a href="http://cran.r-project.org/">R</a></li>
+<li>Window
+<ol class="incremental">
+<li><a href="http://cran.r-project.org/">R</a></li>
+<li><a href="http://www.murdoch-sutherland.com/Rtools/">Rtools</a></li>
+<li><a href="http://www.ctex.org/HomePage">LaTeX</a></li>
+</ol></li>
+</ul>
+</div><div class="slide section level2">
+<h1>Quick start</h1>
+<pre><code>setwd(&quot;/home/administrator/Desktop/test&quot;)
+f &lt;- function(a) {
+    print(a)
+}
+greet &lt;- &quot;hello world!&quot;
+package.skeleton(name = &quot;mypackage&quot;, list = c(&quot;f&quot;, &quot;greet&quot;))</code></pre>
+<pre><code>## Creating directories ... Creating DESCRIPTION ... Creating NAMESPACE ...
+## Creating Read-and-delete-me ... Saving functions and data ... Making help
+## files ... Done. Further steps are described in
+## &#39;./mypackage/Read-and-delete-me&#39;.</code></pre>
+</div><div class="slide section level2">
+<h1>What happened?</h1>
+<p><img src="http://i.imgur.com/g2M2FIX.jpg" /></p>
+</div><div class="slide section level2">
+<h1>Structure</h1>
+<ul class="incremental">
+<li>mypackage
+<ul class="incremental">
+<li>read and delete me</li>
+<li>NAMESPACE</li>
+<li>DESCRIPTION</li>
+<li>R
+<ul class="incremental">
+<li>f.R</li>
+</ul></li>
+<li>man
+<ul class="incremental">
+<li>f.Rd</li>
+<li>greet.Rd</li>
+<li>mypackage-package.Rd</li>
+</ul></li>
+<li>data
+<ul class="incremental">
+<li>greet.rda</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="slide section level2">
+<h1>read and delete me</h1>
+<ul class="incremental">
+<li>Edit the help file skeletons in 'man', possibly combining helpfiles for multiple functions.</li>
+<li>Edit the exports in 'NAMESPACE', and add necessary imports.</li>
+<li>Put any C/C++/Fortran code in 'src'.</li>
+<li>If you have compiled code, add a useDynLib() directive to 'NAMESPACE'.</li>
+<li>Run R CMD build to build the package tarball.</li>
+<li>Run R CMD check to check the package tarball.</li>
+</ul>
+<p>Read “Writing R Extensions” for more information.</p>
+</div><div class="slide section level2">
+<h1>DESCRIPTION</h1>
+<blockquote>
+<p>Package: mypackage<br /> Type: Package<br /> Title: What the package does (short line)<br /> Version: 1.0<br /> Date: 2013-09-10<br /> Author: Who wrote it<br /> Maintainer: Who to complain to <script type="text/javascript">
+<!--
+h='&#x73;&#x6f;&#x6d;&#x65;&#x77;&#104;&#x65;&#114;&#x65;&#46;&#110;&#x65;&#116;';a='&#64;';n='&#x79;&#x6f;&#x75;&#114;&#102;&#x61;&#x75;&#108;&#116;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x79;&#x6f;&#x75;&#114;&#102;&#x61;&#x75;&#108;&#116;&#32;&#x61;&#116;&#32;&#x73;&#x6f;&#x6d;&#x65;&#x77;&#104;&#x65;&#114;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#110;&#x65;&#116;</noscript><br /> Description: More about what it does (maybe more than one line)<br /> License: What license is it under?</p>
+</blockquote>
+</div><div class="slide section level2">
+<h1>NAMESPACE</h1>
+<blockquote>
+<p>exportPattern(“<sup>[[:alpha:]]+”)</sup></p>
+</blockquote>
+<ul class="incremental">
+<li>function: define the export pattern, control the function availability</li>
+</ul>
+<blockquote>
+<p>importFrome(foo, bar)</p>
+</blockquote>
+<ul class="incremental">
+<li>funciton: import package control</li>
+</ul>
+</div><div class="slide section level2">
+<h1>f.Rd, greet.Rd, mypackage-package.Rd</h1>
+<ul class="incremental">
+<li>format: LaTeX document</li>
+<li>fill the form</li>
+<li>everything is OK!</li>
+</ul>
+</div><div class="slide section level2">
+<h1>compile</h1>
+<pre><code>R CMD build --binary mypackage</code></pre>
+<ul>
+<li>checking for file ‘mypackage/DESCRIPTION’ … OK<br /></li>
+<li>preparing ‘mypackage’:<br /></li>
+<li>checking DESCRIPTION meta-information … OK<br /></li>
+<li>checking for LF line-endings in source and make files<br /></li>
+<li>checking for empty or unneeded directories<br /></li>
+<li>looking to see if a ‘data/datalist’ file should be added<br /></li>
+<li>building ‘mypackage_1.0.tar.gz’</li>
+</ul>
+</div><div class="slide section level2">
+<h1>install the package</h1>
+<pre><code>install.packages(&quot;~/Desktop/test/mypackage_1.0.tar.gz&quot;, repos = NULL, type = &quot;source&quot;)</code></pre>
+<pre><code>## Installing package into
+## &#39;/home/administrator/R/x86_64-pc-linux-gnu-library/3.0&#39; (as &#39;lib&#39; is
+## unspecified)</code></pre>
+<pre><code>require(mypackage)</code></pre>
+<pre><code>## Loading required package: mypackage
+## 
+## Attaching package: &#39;mypackage&#39;
+## 
+## The following object is masked _by_ &#39;.GlobalEnv&#39;:
+## 
+## f</code></pre>
+<pre><code>data(greet)
+f(greet)</code></pre>
+<pre><code>## [1] &quot;hello world!&quot;</code></pre>
+</div>
+</body>
+</html>
