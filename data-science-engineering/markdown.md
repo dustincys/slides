@@ -8,52 +8,31 @@ Yanshuo Chu
 [<i class="fa-brands fa-twitter fa-2xs"></i>](https://twitter.com/dustin13316197)
 [<i class="fa-brands fa-weibo fa-2xs"></i>](https://www.weibo.com/chuyanshuo)
 
-04/17/2023
+02/17/2025
 
 
 
 ## 如何高效、快速完成项目
-
 ![run](https://raw.githubusercontent.com/dustincys/slides/images/134233agtww9t4sl9wg5ut.jpg)
-
-图片来源：<https://blog.sciencenet.cn/blog-520749-1042142.html>
-
 
 ### 故事是怎么形成的
 ![idea](https://raw.githubusercontent.com/dustincys/slides/images/1342287r3v4r7aalavrcor.png)
 
-图片来源：<https://blog.sciencenet.cn/blog-520749-1042142.html>
-
-
-
 ## 数据科学常见工程问题
+![刀耕火种](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/daogenghuozhong.jpeg)
 
-- 工程烂尾
-  - 备份烂尾
-  - 场地烂尾
-- 算力不足
-  - 硬件利用率低
-  - 软件无效内耗
-- 思维僵化
-  - 自由软件“伪自由”
-  - 舒适区不“舒服”
-
-
-
-## 软件工具推荐
-- [tmux](https://github.com/tmux/tmux/wiki)
-  - 多任务/窗口/工程管理
-  - 现场恢复
-- [ranger](https://github.com/ranger/ranger)
-  - 管理文件
-  - 将命令映射为快捷键
-- [emacs](https://www.gnu.org/software/emacs/)
-  - 可在终端运行的编辑器
-  - 具有RELP的编辑器
-
-
+### “刀耕火种”式数据分析
+- 没有数据和代码的管理和备份（耕地不可重复利用）
+- 单机（session）、逐行“复制粘贴”式计算（石器时代的耕作工具）
 
 ## 数据备份
+![数据备份](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/data_backup.png)
+
+数据科学杂谈之四--数据存档：
+https://yanshuo.site/cn/2022/07/datascience/
+
+
+### 数据备份内容
 
 - 数据压缩包
 - 数据校验码
@@ -63,16 +42,7 @@ Yanshuo Chu
   - 数据分析者发现的数据信息
   - ...
 
-详细参考： [数据科学杂谈之四--数据存档](https://yanshuo.site/cn/2022/07/datascience/)
-
-
-### 压缩
-```bash
-tar –czf jpg.tar.gz *.jpg
-```
-
-
-### 数据校验码
+### 数据校验
 ranger的配置文件rc.conf中添加：
 ```bash
 map ,md5 console shell -f find . -type f ! -iname "*md5sum.txt" | xargs -n 1 md5sum > md5sum.txt
@@ -80,16 +50,12 @@ map ,cmd5 shell -f md5sum -c md5sum.txt > check_md5sum.txt && cat check_md5sum.t
 map ,vmd5 shell -f cat check_md5sum.txt | awk '{s[$2]++};END{for(i in s) print i,s[i]}' > report_md5sum.txt && wc -l md5sum.txt >> report_md5sum.txt && wc -l check_md5sum.txt >> report_md5sum.txt
 ```
 
-
-
 ## 代码备份
 
-- 可回溯历史
-- 可全文检索
-- 可版本管理
+![代码备份](https://raw.githubusercontent.com/dustincys/slides/refs/heads/master/code_backup.png)
 
-详细参考：[数据科学杂谈之六--自动备份](https://yanshuo.site/cn/2022/12/datascience2/)
-
+数据科学杂谈之六--自动备份：
+https://yanshuo.site/cn/2022/12/datascience2/
 
 ### 服务器端备份脚本
 `backupAllCode.sh`:
@@ -135,14 +101,12 @@ scp your.server.domain:/path/to/cnofigs.zip /path/to/local/folder
 ```
 
 
+## 工程架构
 
-## 文件夹结构
+![工程架构](https://raw.githubusercontent.com/dustincys/cn/assets/scheme_of_path.png)
 
-- 树型结构
-- 共有/私有文件
-
-详细参考： [数据科学杂谈之一--工程架构](https://yanshuo.site/cn/2020/10/datascience/)
-
+数据科学杂谈之一--工程架构：
+https://yanshuo.site/cn/2020/10/datascience/
 
 ### 树型文件夹结构举例
 ```
@@ -185,9 +149,42 @@ git init
 ```
 
 
+## 迭代反馈
 
-## 环境结构
+![迭代反馈](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/feedback.png)
 
+
+### 此处举一个反例
+
+![SpatialInferCNV](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/spatialinfercnv.png)
+
+## 规模化管理工具
+
+![奇异博士的传送门](https://raw.githubusercontent.com/dustincys/cn/assets/doctorstrange-drstrange.gif)
+
+数据科学杂谈之五--奇异博士的传送门：
+https://yanshuo.site/cn/2022/11/datascience/
+
+
+## 其他
+
+- 数据科学杂谈之十二--现场恢复 https://yanshuo.site/cn/2024/05/restorescene/
+- 数据科学杂谈之十一--瞬时捕捉 https://yanshuo.site/cn/2024/05/datascience/
+- 数据科学杂谈之十--算力分配 https://yanshuo.site/cn/2023/08/computing-power/
+- 数据科学杂谈之八--日程管理 https://yanshuo.site/cn/2023/04/datascience_agenda/
+
+## 我用的主要生产力工具
+- [tmux](https://github.com/tmux/tmux/wiki)
+  - 多任务/窗口/工程管理
+  - 现场恢复
+- [ranger](https://github.com/ranger/ranger)
+  - 管理文件
+  - 将命令映射为快捷键
+- [emacs](https://www.gnu.org/software/emacs/)
+  - 可在终端运行的编辑器
+  - 具有RELP的编辑器
+
+## 我用的主要生产力工具
 - 环境管理
   - [conda](https://docs.conda.io/en/latest/)
   - [docker](https://www.docker.com/)
@@ -197,11 +194,9 @@ git init
   - [snakemake](https://snakemake.readthedocs.io/en/stable/)
 - 版本管理
   - [git](https://git-scm.com/)
-  - [SVN](https://subversion.apache.org/)
 
 
-
-## 充分利用算力
+## 我用的主要生产力工具
 
 - 并行/异步
   - [LSF](https://www.ibm.com/support/pages/what-lsf)
@@ -393,23 +388,4 @@ with(mlflow_start_run(), {
 ![screenshort](https://raw.githubusercontent.com/dustincys/slides/images/Screenshot%202023-04-18%20at%2011.35.25.png)
 
 
-
-## 自动化/智能化操作流程
-
-- 自动生成任务
-- [自动备份](https://yanshuo.site/cn/2022/12/datascience2/)
-- [智能跳转](https://yanshuo.site/cn/2022/11/datascience/)
-- ..
-
-
-
-## 开放思维
-
-- 充分使用自由软件
-- 架构优于细节
-- “舒适区不舒服”
-
-
-
 ## 谢谢
-![公众号](https://raw.githubusercontent.com/dustincys/cn/assets/qrcode_for_gh_af6e07ba273e_258.jpg)
