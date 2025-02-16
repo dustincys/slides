@@ -11,29 +11,35 @@ Yanshuo Chu
 02/17/2025
 
 
+
 ## 如何高效、快速完成项目
 ![run](https://raw.githubusercontent.com/dustincys/slides/images/134233agtww9t4sl9wg5ut.jpg)
 
-## 故事是怎么形成的
+
+### 故事是怎么形成的
 ![idea](https://raw.githubusercontent.com/dustincys/slides/images/1342287r3v4r7aalavrcor.png)
+
+
 
 ## 数据科学常见工程问题
 ![刀耕火种](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/daogenghuozhong.jpeg)
 
-## “刀耕火种”式数据分析
+
+### “刀耕火种”式数据分析
 - 没有数据和代码的管理和备份（耕地不可重复利用）
 - 单机（session）、逐行“复制粘贴”式计算（石器时代的耕作工具）
 
+
+
 ## 数据备份
-![数据备份](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/data_backup.png)
+<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/data_backup.png"  style="height: 300px !important;" >
 
 数据科学杂谈之四--数据存档：
 https://yanshuo.site/cn/2022/07/datascience/
 
 
-## 数据备份内容
+### 数据备份内容
 
-- 数据压缩包
 - 数据校验码
 - 数据信息说明
   - 数据来源
@@ -41,7 +47,8 @@ https://yanshuo.site/cn/2022/07/datascience/
   - 数据分析者发现的数据信息
   - ...
 
-## 数据校验
+
+### 数据校验
 ranger的配置文件rc.conf中添加：
 ```bash
 map ,md5 console shell -f find . -type f ! -iname "*md5sum.txt" | xargs -n 1 md5sum > md5sum.txt
@@ -49,14 +56,16 @@ map ,cmd5 shell -f md5sum -c md5sum.txt > check_md5sum.txt && cat check_md5sum.t
 map ,vmd5 shell -f cat check_md5sum.txt | awk '{s[$2]++};END{for(i in s) print i,s[i]}' > report_md5sum.txt && wc -l md5sum.txt >> report_md5sum.txt && wc -l check_md5sum.txt >> report_md5sum.txt
 ```
 
-## 代码备份
 
-![代码备份](https://raw.githubusercontent.com/dustincys/slides/refs/heads/master/code_backup.png)
+
+## 代码备份
+<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/master/code_backup.png" style="height: 300px !important;" >
 
 数据科学杂谈之六--自动备份：
 https://yanshuo.site/cn/2022/12/datascience2/
 
-## 服务器端备份脚本
+
+### 服务器端备份脚本
 `backupAllCode.sh`:
 ```bash
 ##!/usr/bin/env bash
@@ -83,7 +92,7 @@ rsync -rav \
 ```
 
 
-## 本地定时自动触发脚本
+### 本地定时自动触发脚本
 1. 运行
 ```bash
 crontab -e
@@ -100,14 +109,15 @@ scp your.server.domain:/path/to/cnofigs.zip /path/to/local/folder
 ```
 
 
-## 工程架构
 
-![工程架构](https://raw.githubusercontent.com/dustincys/cn/assets/scheme_of_path.png)
+## 工程架构
+<img src="https://raw.githubusercontent.com/dustincys/cn/assets/scheme_of_path.png" style="height: 300px !important;" >
 
 数据科学杂谈之一--工程架构：
 https://yanshuo.site/cn/2020/10/datascience/
 
-## 树型文件夹结构举例
+
+### 树型文件夹结构举例
 ```
 - project1
   - code
@@ -134,7 +144,8 @@ https://yanshuo.site/cn/2020/10/datascience/
       - dataset 2
 ```
 
-## 自动化生成工程文件夹结构
+
+### 自动化生成工程文件夹结构
 1. 在任意位置（最好${HOME}/templates）手动创建以上文件夹（除了dataset）
 2. 创建一个脚本`newproject.sh`:
 
@@ -147,14 +158,15 @@ git init
 ```
 
 
+
 ## 迭代反馈
+<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/feedback.png" style="height: 500px !important;" >
 
-![迭代反馈](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/feedback.png)
+
+### 此处举一个反例
+<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/spatialinfercnv.png" style="height: 500px !important;" >
 
 
-## 此处举一个反例
-
-![SpatialInferCNV](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/spatialinfercnv.png)
 
 ## 规模化管理工具
 
@@ -164,12 +176,15 @@ git init
 https://yanshuo.site/cn/2022/11/datascience/
 
 
+
 ## 其他
 
 - 数据科学杂谈之十二--现场恢复 https://yanshuo.site/cn/2024/05/restorescene/
 - 数据科学杂谈之十一--瞬时捕捉 https://yanshuo.site/cn/2024/05/datascience/
 - 数据科学杂谈之十--算力分配 https://yanshuo.site/cn/2023/08/computing-power/
 - 数据科学杂谈之八--日程管理 https://yanshuo.site/cn/2023/04/datascience_agenda/
+
+
 
 ## 我用的主要生产力工具
 - [tmux](https://github.com/tmux/tmux/wiki)
@@ -182,6 +197,8 @@ https://yanshuo.site/cn/2022/11/datascience/
   - 可在终端运行的编辑器
   - 具有RELP的编辑器
 
+
+
 ## 我用的主要生产力工具
 - 环境管理
   - [conda](https://docs.conda.io/en/latest/)
@@ -192,6 +209,7 @@ https://yanshuo.site/cn/2022/11/datascience/
   - [snakemake](https://snakemake.readthedocs.io/en/stable/)
 - 版本管理
   - [git](https://git-scm.com/)
+
 
 
 ## 我用的主要生产力工具
@@ -383,6 +401,7 @@ with(mlflow_start_run(), {
 ### 之二：bulk-RNAseq分析
 
 ![screenshort](https://raw.githubusercontent.com/dustincys/slides/images/Screenshot%202023-04-18%20at%2011.35.25.png)
+
 
 
 ## 谢谢
