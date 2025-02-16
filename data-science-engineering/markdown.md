@@ -186,7 +186,7 @@ https://yanshuo.site/cn/2022/11/datascience/
 
 
 
-## 我用的主要生产力工具
+## 推荐主要生产力工具
 - [tmux](https://github.com/tmux/tmux/wiki)
   - 多任务/窗口/工程管理
   - 现场恢复
@@ -199,7 +199,7 @@ https://yanshuo.site/cn/2022/11/datascience/
 
 
 
-## 我用的主要生产力工具
+## 推荐主要生产力工具
 - 环境管理
   - [conda](https://docs.conda.io/en/latest/)
   - [docker](https://www.docker.com/)
@@ -212,7 +212,7 @@ https://yanshuo.site/cn/2022/11/datascience/
 
 
 
-## 我用的主要生产力工具
+## 推荐主要生产力工具
 
 - 并行/异步
   - [LSF](https://www.ibm.com/support/pages/what-lsf)
