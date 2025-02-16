@@ -11,17 +11,16 @@ Yanshuo Chu
 02/17/2025
 
 
-
 ## 如何高效、快速完成项目
 ![run](https://raw.githubusercontent.com/dustincys/slides/images/134233agtww9t4sl9wg5ut.jpg)
 
-### 故事是怎么形成的
+## 故事是怎么形成的
 ![idea](https://raw.githubusercontent.com/dustincys/slides/images/1342287r3v4r7aalavrcor.png)
 
 ## 数据科学常见工程问题
 ![刀耕火种](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/daogenghuozhong.jpeg)
 
-### “刀耕火种”式数据分析
+## “刀耕火种”式数据分析
 - 没有数据和代码的管理和备份（耕地不可重复利用）
 - 单机（session）、逐行“复制粘贴”式计算（石器时代的耕作工具）
 
@@ -32,7 +31,7 @@ Yanshuo Chu
 https://yanshuo.site/cn/2022/07/datascience/
 
 
-### 数据备份内容
+## 数据备份内容
 
 - 数据压缩包
 - 数据校验码
@@ -42,7 +41,7 @@ https://yanshuo.site/cn/2022/07/datascience/
   - 数据分析者发现的数据信息
   - ...
 
-### 数据校验
+## 数据校验
 ranger的配置文件rc.conf中添加：
 ```bash
 map ,md5 console shell -f find . -type f ! -iname "*md5sum.txt" | xargs -n 1 md5sum > md5sum.txt
@@ -57,7 +56,7 @@ map ,vmd5 shell -f cat check_md5sum.txt | awk '{s[$2]++};END{for(i in s) print i
 数据科学杂谈之六--自动备份：
 https://yanshuo.site/cn/2022/12/datascience2/
 
-### 服务器端备份脚本
+## 服务器端备份脚本
 `backupAllCode.sh`:
 ```bash
 ##!/usr/bin/env bash
@@ -84,7 +83,7 @@ rsync -rav \
 ```
 
 
-### 本地定时自动触发脚本
+## 本地定时自动触发脚本
 1. 运行
 ```bash
 crontab -e
@@ -108,7 +107,7 @@ scp your.server.domain:/path/to/cnofigs.zip /path/to/local/folder
 数据科学杂谈之一--工程架构：
 https://yanshuo.site/cn/2020/10/datascience/
 
-### 树型文件夹结构举例
+## 树型文件夹结构举例
 ```
 - project1
   - code
@@ -135,8 +134,7 @@ https://yanshuo.site/cn/2020/10/datascience/
       - dataset 2
 ```
 
-
-### 自动化生成工程文件夹结构
+## 自动化生成工程文件夹结构
 1. 在任意位置（最好${HOME}/templates）手动创建以上文件夹（除了dataset）
 2. 创建一个脚本`newproject.sh`:
 
@@ -154,7 +152,7 @@ git init
 ![迭代反馈](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/feedback.png)
 
 
-### 此处举一个反例
+## 此处举一个反例
 
 ![SpatialInferCNV](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/spatialinfercnv.png)
 
@@ -205,7 +203,6 @@ https://yanshuo.site/cn/2022/11/datascience/
 
 
 ### 之一：monocle3的参数寻优
-
 
 #### 提交job
 ```bash
