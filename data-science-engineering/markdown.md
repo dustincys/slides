@@ -1,14 +1,14 @@
 # 数据科学工程
 
-Yanshuo Chu
+初砚硕
 
-[https://yanshuo.site](https://yanshuo.site)
+[![招生](https://img.shields.io/badge/招生-进行中-green.svg)](https://dustincys.github.io/cn/2025/03/jobad/)
 
+[<i class="fa-solid fa-house fa-2xs"></i>](https://yanshuo.site)
 [<i class="fa-brands fa-github fa-2xs"></i>](https://github.com/dustincys/)
 [<i class="fa-brands fa-twitter fa-2xs"></i>](https://twitter.com/dustin13316197)
 [<i class="fa-brands fa-weibo fa-2xs"></i>](https://www.weibo.com/chuyanshuo)
 
-02/17/2025
 
 
 
@@ -405,3 +405,13 @@ with(mlflow_start_run(), {
 
 
 ## 谢谢
+
+初砚硕
+
+[![招生](https://img.shields.io/badge/招生-进行中-green.svg)](https://dustincys.github.io/cn/2025/03/jobad/)
+
+[<i class="fa-solid fa-house fa-2xs"></i>](https://yanshuo.site)
+[<i class="fa-brands fa-github fa-2xs"></i>](https://github.com/dustincys/)
+[<i class="fa-brands fa-twitter fa-2xs"></i>](https://twitter.com/dustin13316197)
+[<i class="fa-brands fa-weibo fa-2xs"></i>](https://www.weibo.com/chuyanshuo)
+
