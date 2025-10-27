@@ -13,16 +13,16 @@
 
 
 ## 如何高效、快速完成项目
-![run](https://raw.githubusercontent.com/dustincys/slides/images/134233agtww9t4sl9wg5ut.jpg)
+![run](https://cdn.jsdelivr.net/gh/dustincys/slides@images/134233agtww9t4sl9wg5ut.jpg)
 
 
 ### 故事是怎么形成的
-![idea](https://raw.githubusercontent.com/dustincys/slides/images/1342287r3v4r7aalavrcor.png)
+![idea](https://cdn.jsdelivr.net/gh/dustincys/slides@images/1342287r3v4r7aalavrcor.png)
 
 
 
 ## 数据科学常见工程问题
-![刀耕火种](https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/daogenghuozhong.jpeg)
+![刀耕火种](https://cdn.jsdelivr.net/gh/dustincys/slides@images/daogenghuozhong.jpeg)
 
 
 ### “刀耕火种”式数据分析
@@ -32,7 +32,7 @@
 
 
 ## 数据备份
-<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/data_backup.png"  style="height: 300px !important;" >
+<img src="https://cdn.jsdelivr.net/gh/dustincys/slides@images/data_backup.png"  style="height: 300px !important;" >
 
 数据科学杂谈之四--数据存档：
 https://yanshuo.site/cn/2022/07/datascience/
@@ -59,7 +59,7 @@ map ,vmd5 shell -f cat check_md5sum.txt | awk '{s[$2]++};END{for(i in s) print i
 
 
 ## 代码备份
-<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/master/code_backup.png" style="height: 300px !important;" >
+<img src="https://cdn.jsdelivr.net/gh/dustincys/slides@master/code_backup.png" style="height: 300px !important;" >
 
 数据科学杂谈之六--自动备份：
 https://yanshuo.site/cn/2022/12/datascience2/
@@ -111,7 +111,7 @@ scp your.server.domain:/path/to/cnofigs.zip /path/to/local/folder
 
 
 ## 工程架构
-<img src="https://raw.githubusercontent.com/dustincys/cn/assets/scheme_of_path.png" style="height: 300px !important;" >
+<img src="https://cdn.jsdelivr.net/gh/dustincys/cn@assets/scheme_of_path.png" style="height: 300px !important;" >
 
 数据科学杂谈之一--工程架构：
 https://yanshuo.site/cn/2020/10/datascience/
@@ -160,17 +160,17 @@ git init
 
 
 ## 迭代反馈
-<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/feedback.png" style="height: 500px !important;" >
+<img src="https://cdn.jsdelivr.net/gh/dustincys/slides@images/feedback.png" style="height: 500px !important;" >
 
 
 ### 此处举一个反例
-<img src="https://raw.githubusercontent.com/dustincys/slides/refs/heads/images/spatialinfercnv.png" style="height: 500px !important;" >
+<img src="https://cdn.jsdelivr.net/gh/dustincys/slides@images/spatialinfercnv.png" style="height: 500px !important;" >
 
 
 
 ## 规模化管理工具
 
-![奇异博士的传送门](https://raw.githubusercontent.com/dustincys/cn/assets/doctorstrange-drstrange.gif)
+![奇异博士的传送门](https://cdn.jsdelivr.net/gh/dustincys/cn@assets/doctorstrange-drstrange.gif)
 
 数据科学杂谈之五--奇异博士的传送门：
 https://yanshuo.site/cn/2022/11/datascience/
@@ -400,7 +400,7 @@ with(mlflow_start_run(), {
 
 ### 之二：bulk-RNAseq分析
 
-![screenshort](https://raw.githubusercontent.com/dustincys/slides/images/Screenshot%202023-04-18%20at%2011.35.25.png)
+![screenshort](https://cdn.jsdelivr.net/gh/dustincys/slides@images/Screenshot%202023-04-18%20at%2011.35.25.png)
 
 
 
